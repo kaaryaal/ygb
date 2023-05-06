@@ -13,7 +13,7 @@ class Excercise {
   String? videoLink;
   int? minutes;
   String? shortDescription;
-  int? day;
+  String? day;
   int? positionOfTheExcercise;
 
   Excercise({
@@ -62,7 +62,7 @@ class Excercise {
       paid: map['paid'] != null ? map['paid'] as bool : null,
       videoLink: map['videoLink'] != null ? map['videoLink'] as String : null,
       minutes: map['minutes'] != null ? map['minutes'] as int : null,
-      day: map['day'] != null ? map['day'] as int : null,
+      day: map['day'] != null ? map['day'] as String : null,
       positionOfTheExcercise: map['positionOfTheExcercise'] != null
           ? map['positionOfTheExcercise'] as int
           : null,

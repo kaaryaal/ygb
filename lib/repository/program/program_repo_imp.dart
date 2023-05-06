@@ -1,6 +1,8 @@
 // ignore_for_file: use_rethrow_when_possible
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_app_mvvm/repository/program/program_repo.dart';
+import '../../data/app_exceptions.dart';
 import '../../model/program_model.dart';
 import '../../res/app_collections.dart';
 
@@ -23,8 +25,10 @@ class ProgramRepoImp implements ProgramRepo {
       }).toList();
 
       return programs;
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
     } catch (e) {
-      throw e;
+      throw FireException(message: e.toString());
     }
   }
 }

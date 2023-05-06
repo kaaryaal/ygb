@@ -5,45 +5,27 @@ import 'package:fitness_app_mvvm/repository/program/program_repo_imp.dart';
 import 'package:flutter/material.dart';
 
 class ProgramViewModel extends ChangeNotifier {
-  List<Map<String, dynamic>> days = [
-    {
-      "day": "Monday",
-      "id": 1,
-    },
-    {
-      "day": "Tuesday",
-      "id": 2,
-    },
-    {
-      "day": "Wednesday",
-      "id": 1,
-    },
-    {
-      "day": "Thursday",
-      "id": 1,
-    },
-    {
-      "day": "Friday",
-      "id": 1,
-    },
-    {
-      "day": "Saturday",
-      "id": 1,
-    },
+  List<String> days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
   ];
 
   final ProgramRepo _programRepoImp = ProgramRepoImp();
 
   FirestoreResponse<List<Program>> _programs = FirestoreResponse.loading();
   Program? _selectedProgram;
-  Map<String, dynamic>? _selectedDay;
+  String? _selectedDay;
 
   FirestoreResponse<List<Program>> get programs => _programs;
   Program? get selectedProgram => _selectedProgram;
-  Map<String, dynamic>? get selectedDay => _selectedDay;
+  String? get selectedDay => _selectedDay;
 
-  setSelectedDay(Map<String, dynamic> map) {
-    _selectedDay = map;
+  setSelectedDay(String day) {
+    _selectedDay = day;
     notifyListeners();
   }
 

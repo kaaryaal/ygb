@@ -1,7 +1,8 @@
 // ignore_for_file: use_rethrow_when_possible
-
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app_mvvm/data/app_exceptions.dart';
 import 'package:fitness_app_mvvm/repository/auth/auth_repo.dart';
 import '../../model/user_model.dart';
 import '../../res/app_collections.dart';
@@ -20,8 +21,10 @@ class AuthRepoImp implements AuthRepo {
       userModel = UserModel.fromMap(userResponse.docs[0].data());
       userModel.uid = _firebaseAuth.currentUser!.uid;
       return userModel;
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
     } catch (e) {
-      throw e;
+      throw FireException(message: e.toString());
     }
   }
 
@@ -53,8 +56,10 @@ class AuthRepoImp implements AuthRepo {
           .add(userModel.toMap());
 
       return await getUserData();
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
     } catch (e) {
-      throw e;
+      throw FireException(message: e.toString());
     }
   }
 
@@ -69,8 +74,10 @@ class AuthRepoImp implements AuthRepo {
         password: password,
       );
       return await getUserData();
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
     } catch (e) {
-      throw e;
+      throw FireException(message: e.toString());
     }
   }
 
@@ -79,8 +86,10 @@ class AuthRepoImp implements AuthRepo {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
       return true;
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
     } catch (e) {
-      throw e;
+      throw FireException(message: e.toString());
     }
   }
 

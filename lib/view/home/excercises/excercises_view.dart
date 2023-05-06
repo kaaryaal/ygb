@@ -29,7 +29,7 @@ class _ExcercisesViewState extends State<ExcercisesView> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       excerciseViewModel.loadExcercises(
         programId: programViewModel.selectedProgram!.id!,
-        day: programViewModel.selectedDay!["id"],
+        day: programViewModel.selectedDay!,
       );
     });
   }
@@ -111,7 +111,7 @@ class _ExcercisesViewState extends State<ExcercisesView> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
-                      "No excercises for ${programViewModel.selectedDay!['day']}",
+                      "No excercises for ${programViewModel.selectedDay!}",
                       style: const TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 16.0,
@@ -128,7 +128,11 @@ class _ExcercisesViewState extends State<ExcercisesView> {
       case Status.ERROR:
         return Center(
           child: Text(
-              programViewModel.programs.message ?? "Something wen't wrong"),
+            programViewModel.programs.message ?? "Something wen't wrong",
+            style: const TextStyle(
+              color: AppColors.whiteColor,
+            ),
+          ),
         );
 
       default:

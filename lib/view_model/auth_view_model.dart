@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitness_app_mvvm/data/response/firestore_response.dart';
 import 'package:fitness_app_mvvm/repository/auth/auth_repo.dart';
 import 'package:fitness_app_mvvm/repository/auth/auth_repo_imp.dart';
@@ -82,7 +84,7 @@ class AuthViewModel extends ChangeNotifier {
 
   logout() async {
     await _authReopImp.logout();
-    setUser(FirestoreResponse.completed(null));
+    navService.nav.pushNamedAndRemoveUntil(RoutesNames.login, (route) => false);
     // navigate to login screen
   }
 }

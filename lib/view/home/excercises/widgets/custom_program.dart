@@ -4,9 +4,9 @@ import 'package:fitness_app_mvvm/utils/routes/routes_names.dart';
 import 'package:fitness_app_mvvm/view_model/program_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../model/program_model.dart';
-import '../../../res/app_colors.dart';
-import '../../../utils/components/custom_blur_widget.dart';
+import '../../../../model/program_model.dart';
+import '../../../../res/app_colors.dart';
+import '../../../../utils/components/custom_blur_widget.dart';
 
 class CustomProgram extends StatefulWidget {
   const CustomProgram({

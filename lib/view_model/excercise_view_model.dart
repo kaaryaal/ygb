@@ -22,7 +22,7 @@ class ExcerciseViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  loadExcercises({required String programId, required int day}) async {
+  loadExcercises({required String programId, required String day}) async {
     try {
       setExcercises(FirestoreResponse.loading());
       var response = await _excerciseRepoImp.loadExcercises(

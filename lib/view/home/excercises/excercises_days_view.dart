@@ -59,7 +59,7 @@ class _ExcersicsesDaysViewState extends State<ExcersicsesDaysView> {
 
   buildDays(Size size) {
     return programViewModel.days
-        .map((Map<String, dynamic> e) => InkWell(
+        .map((String e) => InkWell(
               onTap: () {
                 programViewModel.setSelectedDay(e);
                 locator<NavService>()
@@ -76,7 +76,7 @@ class _ExcersicsesDaysViewState extends State<ExcersicsesDaysView> {
                 ),
                 child: Center(
                   child: Text(
-                    e["day"],
+                    e,
                     style: const TextStyle(
                       color: AppColors.whiteColor,
                       fontWeight: FontWeight.bold,

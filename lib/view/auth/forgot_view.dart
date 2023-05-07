@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../../res/app_colors.dart';
 import '../../utils/components/custom_button.dart';
 import '../../utils/components/custom_textfield.dart';
+import '../../utils/locator/locator.dart';
+import '../../utils/nav_service.dart';
 
 class ForgotView extends StatefulWidget {
   const ForgotView({super.key});
@@ -99,7 +101,13 @@ class _ForgotViewState extends State<ForgotView> {
                     return;
                   }
 
-                  AppIndicators.circularIndicator;
+                  showDialog(
+                    context: locator<NavService>().nav.context,
+                    builder: (_) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    barrierDismissible: false,
+                  );
 
                   await authViewModel.forgotUser(
                       email: emailController.text.trim());

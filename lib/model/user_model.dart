@@ -12,6 +12,7 @@ class UserModel {
   String? profileImage;
   DateTime timestamp;
   DateTime? subscriptionData;
+  String? stripId;
 
   UserModel({
     this.uid,
@@ -24,6 +25,7 @@ class UserModel {
     this.profileImage,
     required this.timestamp,
     this.subscriptionData,
+    this.stripId,
   });
 
   Map<String, dynamic> toMap() {
@@ -38,6 +40,7 @@ class UserModel {
       'profileImage': profileImage,
       'timestamp': timestamp.millisecondsSinceEpoch,
       'subscriptionData': subscriptionData?.millisecondsSinceEpoch,
+      'stripId': stripId,
     };
   }
 
@@ -56,6 +59,7 @@ class UserModel {
       subscriptionData: map['subscriptionData'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['subscriptionData'] as int)
           : null,
+      stripId: map['stripId'] != null ? map['stripId'] as String : null,
     );
   }
 
@@ -63,9 +67,4 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'UserModel(uid: $uid, name: $name, email: $email, weight: $weight, height: $height, dob: $dob, gender: $gender, profileImage: $profileImage, timestamp: $timestamp, subscriptionData: $subscriptionData)';
-  }
 }

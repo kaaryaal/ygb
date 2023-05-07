@@ -1,8 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:fitness_app_mvvm/res/app_indicators.dart';
+import 'package:fitness_app_mvvm/view/home/drawer/drawer.dart';
 import 'package:fitness_app_mvvm/view/home/excercises/widgets/custom_program.dart';
 import 'package:fitness_app_mvvm/view_model/auth_view_model.dart';
 import 'package:fitness_app_mvvm/view_model/program_view_model.dart';
+import 'package:fitness_app_mvvm/view_model/subscription_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../data/response/status.dart';
@@ -19,6 +19,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   late ProgramViewModel programViewModel;
   late AuthViewModel authViewModel;
+  late SubscriptionViewModel subscriptionViewModel;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<String> dropdownValues = [
@@ -43,11 +44,12 @@ class _HomeViewState extends State<HomeView> {
     Size size = MediaQuery.of(context).size;
     programViewModel = Provider.of<ProgramViewModel>(context);
     authViewModel = Provider.of<AuthViewModel>(context);
+    subscriptionViewModel = Provider.of<SubscriptionViewModel>(context);
 
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppColors.lightBlackColor,
-      drawer: appDrawer(size),
+      drawer: const AppDrawer(),
       body: SafeArea(
         child: SizedBox(
           height: size.height,
@@ -93,108 +95,6 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Drawer appDrawer(Size size) {
-    return Drawer(
-      backgroundColor: AppColors.whiteColor.withOpacity(.9),
-      child: Column(
-        children: [
-          Container(
-            height: size.height * 0.35,
-            width: size.width,
-            decoration: BoxDecoration(
-              color: AppColors.lightBlackColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(size.height * 0.03),
-                bottomRight: Radius.circular(size.height * 0.03),
-              ),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                const Spacer(),
-                const CircleAvatar(
-                  radius: 40,
-                  backgroundColor: AppColors.whiteColor,
-                  child: Icon(
-                    Icons.person_outline_rounded,
-                    color: AppColors.blackColor,
-                    size: 80,
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  authViewModel.user.data!.name!,
-                  style: const TextStyle(
-                    color: AppColors.whiteColor,
-                    fontSize: 20,
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.01,
-                ),
-                AutoSizeText(
-                  authViewModel.user.data!.email!,
-                  style: const TextStyle(
-                    color: AppColors.whiteColor,
-                    fontSize: 14,
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-              ],
-            ),
-          ),
-          const Spacer(),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              margin: EdgeInsets.only(left: size.width * 0.04),
-              height: size.height * 0.08,
-              width: size.width * 0.4,
-              decoration: BoxDecoration(
-                color: AppColors.blackColor.withOpacity(.1),
-                borderRadius: BorderRadius.circular(size.height * 0.02),
-              ),
-              child: InkWell(
-                onTap: () async {
-                  AppIndicators.circularIndicator;
-                  await authViewModel.logout();
-                },
-                child: Row(
-                  children: const [
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Icon(
-                      Icons.logout,
-                      color: AppColors.blueColor,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.04,
-          ),
-        ],
       ),
     );
   }

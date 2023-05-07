@@ -46,6 +46,29 @@ class AuthRepoImp implements AuthRepo {
   }
 
   @override
+  Future updateUser({required UserModel userModel}) async {
+    try {
+      var userDocs = await _firebaseFirestore
+          .collection(AppCollections.users)
+          .where("uid", isEqualTo: userModel.uid!)
+          .get();
+      if (userDocs.docs.isNotEmpty) {
+        await _firebaseFirestore
+            .collection(AppCollections.users)
+            .doc(userDocs.docs[0].id)
+            .update(userModel.toMap());
+      }
+    } on SocketException {
+      throw NoConnectionException(message: "No internet connection");
+    } on FirebaseAuthException catch (e) {
+      throw checkError(e);
+    } catch (e) {
+      log(e.toString());
+      throw FireException(message: e.toString());
+    }
+  }
+
+  @override
   Future<dynamic> registerUers({
     required UserModel userModel,
     required String password,

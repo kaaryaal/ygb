@@ -12,9 +12,13 @@ class AuthViewModel extends ChangeNotifier {
   final AuthRepo _authReopImp = AuthRepoImp();
   final NavService navService = locator<NavService>();
 
+  dynamic _isSubscribed;
+
   FirestoreResponse<UserModel> _user = FirestoreResponse.loading();
 
   FirestoreResponse<UserModel> get user => _user;
+
+  dynamic get isSubscribed => _isSubscribed;
 
   initUser() async {
     try {
@@ -36,8 +40,30 @@ class AuthViewModel extends ChangeNotifier {
     }
   }
 
+  updateUser() async {
+    try {
+      await _authReopImp.updateUser(userModel: _user.data!);
+      setUserSubscription();
+      notifyListeners();
+    } catch (e) {
+      AppSnacbars.errorSnackbar(e.toString());
+    }
+  }
+
+  setUserSubscription() {
+    if (_user.data!.subscriptionData != null) {
+      if (DateTime.now().millisecondsSinceEpoch >
+          _user.data!.subscriptionData!.millisecondsSinceEpoch) {
+        _isSubscribed = false;
+      } else {
+        _isSubscribed = true;
+      }
+    }
+  }
+
   setUser(FirestoreResponse<UserModel> response) {
     _user = response;
+    setUserSubscription();
     notifyListeners();
   }
 

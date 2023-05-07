@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fitness_app_mvvm/utils/components/custom_snackbar.dart';
 import 'package:fitness_app_mvvm/utils/locator/locator.dart';
 import 'package:fitness_app_mvvm/utils/nav_service.dart';
 import 'package:fitness_app_mvvm/utils/routes/routes_names.dart';
+import 'package:fitness_app_mvvm/view_model/auth_view_model.dart';
 import 'package:fitness_app_mvvm/view_model/excercise_view_model.dart';
 import 'package:fitness_app_mvvm/view_model/program_view_model.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +26,7 @@ class _ExcercisesViewState extends State<ExcercisesView> {
   final NavService navService = locator<NavService>();
   late ProgramViewModel programViewModel;
   late ExcerciseViewModel excerciseViewModel;
+  late AuthViewModel authViewModel;
 
   @override
   void initState() {
@@ -39,6 +44,7 @@ class _ExcercisesViewState extends State<ExcercisesView> {
     Size size = MediaQuery.of(context).size;
     programViewModel = Provider.of<ProgramViewModel>(context);
     excerciseViewModel = Provider.of<ExcerciseViewModel>(context);
+    authViewModel = Provider.of<AuthViewModel>(context);
 
     return Scaffold(
       backgroundColor: AppColors.lightBlackColor,
@@ -145,6 +151,11 @@ class _ExcercisesViewState extends State<ExcercisesView> {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
+          log(authViewModel.isSubscribed.toString());
+          if (authViewModel.isSubscribed != true) {
+            AppSnacbars.snackbar("Please buy subscription to unlock.");
+            return;
+          }
           excerciseViewModel.setSelectedExcercise(excercise);
           locator<NavService>()
               .nav
@@ -201,9 +212,13 @@ class _ExcercisesViewState extends State<ExcercisesView> {
                           ),
                           const Spacer(),
                           if (excercise.paid!) ...[
-                            const Icon(
-                              Icons.lock,
-                              color: Colors.redAccent,
+                            Icon(
+                              authViewModel.isSubscribed == true
+                                  ? Icons.lock_open
+                                  : Icons.lock,
+                              color: authViewModel.isSubscribed == true
+                                  ? Colors.green
+                                  : Colors.redAccent,
                             ),
                           ],
                         ],

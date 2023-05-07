@@ -5,5 +5,6 @@ abstract class AuthRepo {
   Future registerUers({required UserModel userModel, required String password});
   Future loginUser({required String email, required String password});
   Future forgotUser({required String email});
+  Future updateUser({required UserModel userModel});
   Future logout();
 }

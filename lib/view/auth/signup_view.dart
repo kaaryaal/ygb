@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitness_app_mvvm/utils/locator/locator.dart';
 import 'package:fitness_app_mvvm/utils/nav_service.dart';
 import 'package:fitness_app_mvvm/utils/routes/routes_names.dart';
@@ -161,7 +163,13 @@ class _SignupViewState extends State<SignupView> {
                     email: emailController.text.trim(),
                   );
 
-                  AppIndicators.circularIndicator;
+                  showDialog(
+                    context: locator<NavService>().nav.context,
+                    builder: (_) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    barrierDismissible: false,
+                  );
 
                   await authViewModel.registerUser(
                     userModel: userModel,

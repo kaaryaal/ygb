@@ -1,4 +1,5 @@
 // ignore_for_file: use_rethrow_when_possible
+import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +18,10 @@ class AuthRepoImp implements AuthRepo {
           .collection(AppCollections.users)
           .where("uid", isEqualTo: _firebaseAuth.currentUser!.uid)
           .get();
+      if (userResponse.docs.isEmpty) {
+        await logout();
+        return;
+      }
       UserModel userModel;
       userModel = UserModel.fromMap(userResponse.docs[0].data());
       userModel.uid = _firebaseAuth.currentUser!.uid;
@@ -59,6 +64,7 @@ class AuthRepoImp implements AuthRepo {
     } on SocketException {
       throw NoConnectionException(message: "No internet connection");
     } catch (e) {
+      log(e.toString());
       throw FireException(message: e.toString());
     }
   }

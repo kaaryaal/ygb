@@ -53,19 +53,26 @@ class AuthViewModel extends ChangeNotifier {
             (Route<dynamic> route) => false,
           );
     } catch (e) {
+      navService.nav.pop();
+      AppSnacbars.snackbar(e.toString());
       setUser(FirestoreResponse.error(e.toString()));
     }
   }
 
   registerUser({required UserModel userModel, required String password}) async {
-    var response = await _authReopImp.registerUers(
-      userModel: userModel,
-      password: password,
-    );
-
     try {
+      var response = await _authReopImp.registerUers(
+        userModel: userModel,
+        password: password,
+      );
       setUser(FirestoreResponse.completed(response));
+      locator<NavService>().nav.pushNamedAndRemoveUntil(
+            RoutesNames.home,
+            (Route<dynamic> route) => false,
+          );
     } catch (e) {
+      navService.nav.pop();
+      AppSnacbars.snackbar(e.toString());
       setUser(FirestoreResponse.error(e.toString()));
     }
   }

@@ -137,7 +137,13 @@ class _LoginViewState extends State<LoginView> {
                     return;
                   }
 
-                  AppIndicators.circularIndicator;
+                  showDialog(
+                    context: locator<NavService>().nav.context,
+                    builder: (_) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    barrierDismissible: false,
+                  );
 
                   await authViewModel.loginUser(
                     email: emailController.text.trim(),

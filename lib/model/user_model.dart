@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
   String? uid;
   String? name;
@@ -34,7 +37,7 @@ class UserModel {
       'gender': gender,
       'profileImage': profileImage,
       'timestamp': timestamp.millisecondsSinceEpoch,
-      'subscriptionData': subscriptionData!.millisecondsSinceEpoch,
+      'subscriptionData': subscriptionData?.millisecondsSinceEpoch,
     };
   }
 
@@ -54,5 +57,15 @@ class UserModel {
           ? DateTime.fromMillisecondsSinceEpoch(map['subscriptionData'] as int)
           : null,
     );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'UserModel(uid: $uid, name: $name, email: $email, weight: $weight, height: $height, dob: $dob, gender: $gender, profileImage: $profileImage, timestamp: $timestamp, subscriptionData: $subscriptionData)';
   }
 }

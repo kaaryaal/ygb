@@ -113,6 +113,7 @@ class AuthRepoImp implements AuthRepo {
   }
 
   AppException checkError(FirebaseAuthException e) {
+    log(e.code);
     if (e.code == "wrong-password") {
       return FireAuthException(message: "Wrong password.");
     } else if (e.code == "invalid-email") {
@@ -127,6 +128,8 @@ class AuthRepoImp implements AuthRepo {
       return FireAuthException(message: "This email is already in use.");
     } else if (e.code == "weak-password") {
       return FireAuthException(message: "Use a strong password.");
+    } else if (e.code == "network-request-failed") {
+      return FireAuthException(message: "No internet connection.");
     } else {
       return GenenralException(message: "Somethign wen't wroing");
     }

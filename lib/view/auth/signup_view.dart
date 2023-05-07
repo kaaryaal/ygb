@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:fitness_app_mvvm/utils/locator/locator.dart';
 import 'package:fitness_app_mvvm/utils/nav_service.dart';
 import 'package:fitness_app_mvvm/utils/routes/routes_names.dart';
@@ -8,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../model/user_model.dart';
 import '../../res/app_colors.dart';
-import '../../res/app_indicators.dart';
+
 import '../../utils/components/custom_button.dart';
 import '../../utils/components/custom_snackbar.dart';
 import '../../utils/components/custom_textfield.dart';

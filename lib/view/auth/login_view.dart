@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../res/app_colors.dart';
-import '../../res/app_indicators.dart';
+
 import '../../utils/components/custom_button.dart';
 import '../../utils/components/custom_snackbar.dart';
 import '../../utils/components/custom_textfield.dart';

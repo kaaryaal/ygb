@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app_mvvm/data/response/status.dart';
 import 'package:fitness_app_mvvm/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,10 @@ class _SplashViewState extends State<SplashView> {
 
       case Status.ERROR:
         return Center(
-          child: Text(authViewModel.user.message ?? "Something wen't wrong"),
+          child: AutoSizeText(
+            authViewModel.user.message ?? "Something wen't wrong",
+            style: const TextStyle(color: AppColors.whiteColor),
+          ),
         );
 
       default:

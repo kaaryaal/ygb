@@ -1,7 +1,7 @@
-class AppExceptions implements Exception {
+class AppException implements Exception {
   final String _message;
 
-  AppExceptions(this._message);
+  AppException(this._message);
 
   @override
   String toString() {
@@ -9,10 +9,18 @@ class AppExceptions implements Exception {
   }
 }
 
-class NoConnectionException extends AppExceptions {
+class NoConnectionException extends AppException {
   NoConnectionException({required String message}) : super(message);
 }
 
-class FireException extends AppExceptions {
+class FireException extends AppException {
   FireException({required String message}) : super(message);
+}
+
+class FireAuthException extends AppException {
+  FireAuthException({required String message}) : super(message);
+}
+
+class GenenralException extends AppException {
+  GenenralException({required String message}) : super(message);
 }

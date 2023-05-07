@@ -54,7 +54,7 @@ class AuthViewModel extends ChangeNotifier {
           );
     } catch (e) {
       navService.nav.pop();
-      AppSnacbars.snackbar(e.toString());
+      AppSnacbars.errorSnackbar(e.toString());
       setUser(FirestoreResponse.error(e.toString()));
     }
   }
@@ -72,7 +72,7 @@ class AuthViewModel extends ChangeNotifier {
           );
     } catch (e) {
       navService.nav.pop();
-      AppSnacbars.snackbar(e.toString());
+      AppSnacbars.errorSnackbar(e.toString());
       setUser(FirestoreResponse.error(e.toString()));
     }
   }
@@ -85,7 +85,7 @@ class AuthViewModel extends ChangeNotifier {
       AppSnacbars.snackbar("Please check your email!");
     } catch (e) {
       navService.nav.pop();
-      AppSnacbars.snackbar(e.toString());
+      AppSnacbars.errorSnackbar(e.toString());
     }
   }
 

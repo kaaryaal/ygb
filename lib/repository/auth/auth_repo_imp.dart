@@ -28,8 +28,10 @@ class AuthRepoImp implements AuthRepo {
       return userModel;
     } on SocketException {
       throw NoConnectionException(message: "No internet connection");
+    } on FirebaseAuthException catch (e) {
+      throw checkError(e);
     } catch (e) {
-      throw FireException(message: e.toString());
+      throw GenenralException(message: e.toString());
     }
   }
 
@@ -63,6 +65,8 @@ class AuthRepoImp implements AuthRepo {
       return await getUserData();
     } on SocketException {
       throw NoConnectionException(message: "No internet connection");
+    } on FirebaseAuthException catch (e) {
+      throw checkError(e);
     } catch (e) {
       log(e.toString());
       throw FireException(message: e.toString());
@@ -82,6 +86,8 @@ class AuthRepoImp implements AuthRepo {
       return await getUserData();
     } on SocketException {
       throw NoConnectionException(message: "No internet connection");
+    } on FirebaseAuthException catch (e) {
+      throw checkError(e);
     } catch (e) {
       throw FireException(message: e.toString());
     }
@@ -94,6 +100,8 @@ class AuthRepoImp implements AuthRepo {
       return true;
     } on SocketException {
       throw NoConnectionException(message: "No internet connection");
+    } on FirebaseAuthException catch (e) {
+      throw checkError(e);
     } catch (e) {
       throw FireException(message: e.toString());
     }
@@ -102,5 +110,25 @@ class AuthRepoImp implements AuthRepo {
   @override
   Future logout() async {
     await _firebaseAuth.signOut();
+  }
+
+  AppException checkError(FirebaseAuthException e) {
+    if (e.code == "wrong-password") {
+      return FireAuthException(message: "Wrong password.");
+    } else if (e.code == "invalid-email") {
+      return FireAuthException(message: "Invalid email.");
+    } else if (e.code == "user-disabled") {
+      return FireAuthException(message: "Your account has been disabled.");
+    } else if (e.code == "user-not-found") {
+      return FireAuthException(message: "User not found with this email.");
+    }
+    // errors for creating new account
+    else if (e.code == "email-already-in-use") {
+      return FireAuthException(message: "This email is already in use.");
+    } else if (e.code == "weak-password") {
+      return FireAuthException(message: "Use a strong password.");
+    } else {
+      return GenenralException(message: "Somethign wen't wroing");
+    }
   }
 }

@@ -51,6 +51,9 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   setUserSubscription() {
+    if (_user.data == null) {
+      return;
+    }
     if (_user.data!.subscriptionData != null) {
       if (DateTime.now().millisecondsSinceEpoch >
           _user.data!.subscriptionData!.millisecondsSinceEpoch) {

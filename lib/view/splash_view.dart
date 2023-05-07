@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fitness_app_mvvm/data/response/status.dart';
+import 'package:fitness_app_mvvm/res/app_images.dart';
 import 'package:fitness_app_mvvm/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,23 +26,33 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     authViewModel = Provider.of<AuthViewModel>(context);
-
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.lightBlackColor,
-      body: buildUi(),
+      body: buildUi(size),
     );
   }
 
-  buildUi() {
+  buildUi(Size size) {
     switch (authViewModel.user.status) {
       case Status.LOADING:
-        return const Center(
-          child: Text(
-            "Fitness app",
-            style: TextStyle(
-              color: AppColors.whiteColor,
-              fontSize: 25.0,
-            ),
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                AppImages.logo,
+                width: size.width * 0.5,
+              ),
+              SizedBox(
+                height: size.height * 0.04,
+              ),
+              const Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.whiteColor,
+                ),
+              ),
+            ],
           ),
         );
 

@@ -4,6 +4,7 @@ import 'package:fitness_app_mvvm/utils/locator/locator.dart';
 import 'package:fitness_app_mvvm/utils/nav_service.dart';
 import 'package:fitness_app_mvvm/utils/routes/app_routes.dart';
 import 'package:fitness_app_mvvm/utils/routes/routes_names.dart';
+import 'package:fitness_app_mvvm/utils/stripe_service/stripe_api.dart';
 import 'package:fitness_app_mvvm/utils/theme/app_theme.dart';
 import 'package:fitness_app_mvvm/view_model/auth_view_model.dart';
 import 'package:fitness_app_mvvm/view_model/excercise_view_model.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   // init firebase
@@ -23,9 +25,7 @@ void main() async {
   // locator registery
   setupLocator();
   // stipe configurations
-  Stripe.publishableKey = StripeConstants.publishableKey;
-  Stripe.merchantIdentifier = 'for fitness app';
-  await Stripe.instance.applySettings();
+  await StripePaymentHandler.intiStripe();
   // run fitness application
   runApp(
     MultiProvider(

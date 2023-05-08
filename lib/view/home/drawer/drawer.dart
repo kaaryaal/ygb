@@ -149,8 +149,7 @@ class _AppDrawerState extends State<AppDrawer> {
           SizedBox(
             height: size.height * 0.02,
           ),
-          if (authViewModel.isSubscribed != null ||
-              authViewModel.isSubscribed == false)
+          if (authViewModel.isSubscribed == true)
             Text(
               "Expires on ${DateFormat("dd MMM yy hh:mm").format(authViewModel.user.data!.subscriptionData!)}",
             ),

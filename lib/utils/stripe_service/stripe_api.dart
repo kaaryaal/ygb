@@ -1,14 +1,21 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:fitness_app_mvvm/utils/stripe_service/api_keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 
-class PaymentHandler {
+class StripePaymentHandler {
+  static intiStripe() async {
+    await dotenv.load();
+    Stripe.publishableKey = dotenv.env["STRIPE_PUBLIC_KEY"]!;
+    Stripe.merchantIdentifier = 'for fitness app';
+    await Stripe.instance.applySettings();
+  }
+
   final client = http.Client();
   static Map<String, String> headers = {
-    'Authorization': 'Bearer ${StipeKeys.secretKey}',
+    'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']!}',
     'Content-Type': 'application/x-www-form-urlencoded'
   };
 

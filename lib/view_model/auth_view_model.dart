@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fitness_app_mvvm/data/response/firestore_response.dart';
 import 'package:fitness_app_mvvm/repository/auth/auth_repo.dart';
 import 'package:fitness_app_mvvm/repository/auth/auth_repo_imp.dart';
@@ -67,6 +69,7 @@ class AuthViewModel extends ChangeNotifier {
   setUser(FirestoreResponse<UserModel> response) {
     _user = response;
     setUserSubscription();
+    log(_isSubscribed.toString());
     notifyListeners();
   }
 

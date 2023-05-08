@@ -15,7 +15,7 @@ class SubscriptionViewModel extends ChangeNotifier {
     try {
       String customerId = "";
       if (authViewModel.user.data!.stripId == null) {
-        final customer = await PaymentHandler().createCustomer();
+        final customer = await StripePaymentHandler().createCustomer();
         customerId = customer['id'];
         authViewModel.user.data!.stripId = customerId;
         await authViewModel.updateUser();
@@ -23,10 +23,10 @@ class SubscriptionViewModel extends ChangeNotifier {
         customerId = authViewModel.user.data!.stripId!;
       }
 
-      final paymentIntent = await PaymentHandler().createPaymentIntents(
+      final paymentIntent = await StripePaymentHandler().createPaymentIntents(
         amount: 15 * 100,
       );
-      await PaymentHandler().createCreditCard(
+      await StripePaymentHandler().createCreditCard(
         customerId: customerId,
         paymentIntentClientSecret: paymentIntent['client_secret'],
       );

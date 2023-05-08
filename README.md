@@ -1,16 +1,24 @@
-# fitness_app_mvvm
+# YGB
 
-A new Flutter project.
+YGB is a mobile application designed for fitness programs.
+In this app, with each program there are several excercises attached order by week days (from monday - saturday). There are some excercises which are free and some are paid. To unlock all the paid excercise, you hav to purchase monthly subcription of $15.
 
-## Getting Started
+## App Architecture:
 
-This project is a starting point for a Flutter application.
+The app is using MVVM, one of the most favourite in the industry.
 
-A few resources to get you started if this is your first Flutter project:
+## Features:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+In this application we have used the following features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Login, Signup and forgot (used with firebase authentication)
+- Programs (Each program has many excercises)
+- Excercises (Each excercise is ascociated with wee day and a program)
+- Excercise can be paid or free (managed by admin)
+- To unlock the paid excercise, you have to buy $15 subscription per month
+- For payment, the application is using Stripe
+
+## Configuration:
+
+As the project is using Google Firebase services, so you have to add a firebase project to this flutter application.
+With this, the app is using stripe as well. There are two keys required (PUBLIC_KEY & SECRET_KEY). Create a .env file in the root folder and add the Stripe keys variables in the environment.

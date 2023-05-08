@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../model/user_model.dart';
 import '../../res/app_colors.dart';
 
+import '../../res/app_images.dart';
 import '../../utils/components/custom_button.dart';
 import '../../utils/components/custom_snackbar.dart';
 import '../../utils/components/custom_textfield.dart';
@@ -63,17 +64,12 @@ class _SignupViewState extends State<SignupView> {
               SizedBox(
                 height: size.height * 0.15,
               ),
-              const Center(
-                child: Text(
-                  "Logo here",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: AppColors.whiteColor,
-                  ),
-                ),
+              Image.asset(
+                AppImages.logo,
+                width: size.width * 0.5,
               ),
               SizedBox(
-                height: size.height * 0.1,
+                height: size.height * 0.08,
               ),
               const Text(
                 "Create an account!",

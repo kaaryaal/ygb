@@ -1,4 +1,4 @@
-![App image](https://drive.google.com/file/d/1T9V4SzwHOkTKS5-fQ9KZ_apFf9EkicX7/view?usp=share_link "Optional title")
+![App image](https://drive.google.com/file/d/1T9V4SzwHOkTKS5-fQ9KZ_apFf9EkicX7/view "Optional title")
 ![App image](https://drive.google.com/file/d/1ttrI2LLm_hsopiEqONBmCQRRIN-GS0tL/view?usp=share_link "Optional title")
 ![App image](https://drive.google.com/file/d/1sLX9RG-XLVrQ80ex1mWL-Xr5tL9XivQh/view?usp=share_link "Optional title")
 ![App image](https://drive.google.com/file/d/1nvyRhw0q-6aOuss2Lu_x7Y0pyGzX1RB8/view?usp=share_link "Optional title")

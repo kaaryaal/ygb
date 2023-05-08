@@ -47,10 +47,10 @@ app.*.map.json
 .env
 
 # Firebase configuration files
-google-services.json
-GoogleService-Info.plist
+*google-services.json
+*GoogleService-Info.plist
 
 # firebase configuration file
-/lib/firebase_options.dart
+*firebase_options.dart
 
 

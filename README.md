@@ -1,8 +1,9 @@
 # YGB
-## App Screenshots
+## App Screenshots:
 ![YGB app (1)](https://github.com/kaaryaal/ygb/assets/132779238/f53af395-035c-46cb-995b-4228be35056a)
 
-## Admin Panel Screenshots
+## Admin Panel Screenshots:
+![YGB app admin panel](https://github.com/kaaryaal/ygb/assets/132779238/4dab7f82-9ad0-475a-9bf9-8fb17e0aea54)
 
 YGB is a mobile application designed for fitness programs.
 In this app, with each program there are several excercises attached order by week days (from monday - saturday). There are some excercises which are free and some are paid. To unlock all the paid excercise, you hav to purchase monthly subcription of $15.
